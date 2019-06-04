@@ -1,11 +1,8 @@
-ARG CODE_VERSION="latest"
-FROM ubuntu:$CODE_VERSION
-RUN echo $CODE_VERSION
-ARG LICENSE_KEY="134-221"
-RUN echo $LICENSE_KEY
-LABEL MAINTAINER nandakishorkn@gmail.com
-RUN mkdir /code
-COPY Sample.sh /code/Sample.sh
-ENV ORACLE_PORT=1521
-RUN chmod +x /code/Sample.sh
-CMD sh /code/Sample.sh
+FROM node
+RUN npm install -y express --save
+RUN npm install -y body-parser --save
+COPY data.json /node/data.json
+COPY node.js /node/node.js
+RUN chmod +x /node/node.js
+EXPOSE 9000
+CMD node /node/node.js
